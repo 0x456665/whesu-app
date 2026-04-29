@@ -6,7 +6,7 @@ edition = "2024"
 [dependencies]
 chrono = { version = "0.4.42", features = ["clock"] }
 hex = "0.4"
-iced = "0.13.1"
+iced = { version = "0.13.1", features = ["image"] }
 rusqlite = { version = "0.39.0", features = ["bundled", "chrono"] }
 rfd = "0.14"
 sha2 = "0.10"
