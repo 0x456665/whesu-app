@@ -2,6 +2,12 @@ use chrono::{NaiveDate, NaiveDateTime};
 use std::fmt;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum AppScreen {
+    Login,
+    Main,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Gender {
     Female,
     Male,
@@ -59,6 +65,9 @@ pub struct ChildRecord {
     pub date_of_birth: NaiveDate,
     pub gender: Gender,
     pub parent: ParentInfo,
+    pub allergies: String,
+    pub emergency_contact_name: String,
+    pub emergency_contact_phone: String,
 }
 
 impl ChildRecord {
