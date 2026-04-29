@@ -9,7 +9,7 @@ use chrono::{Datelike, Local, NaiveDate};
 use iced::{
     Alignment, Color, Element, Fill, Font, Length, Shadow, Size, Task, Theme, Vector, application,
     widget::{
-        Row, button, column, container, horizontal_rule, pick_list, row, scrollable, text,
+        Row, button, column, container, horizontal_rule, image, pick_list, row, scrollable, text,
         text_input,
     },
     window,
@@ -508,7 +508,7 @@ enum Message {
     RequestDeleteChild(u32),
     ConfirmDelete,
     CancelDelete,
-    // ResetChildForm,
+    ResetChildForm,
     ChildFormChanged(ChildFormField, String),
     ChildGenderSelected(Gender),
     SaveChild,
@@ -679,7 +679,17 @@ fn view(state: &DaycareApp) -> Element<'_, Message> {
 }
 
 fn view_login(state: &DaycareApp) -> Element<'_, Message> {
+    let logo_handle = iced::widget::image::Handle::from_bytes(
+        include_bytes!("../assets/logo.png").to_vec(),
+    );
     let logo = column![
+        container(
+            image(logo_handle)
+                .width(Length::Fixed(100.0))
+                .height(Length::Fixed(100.0))
+        )
+        .align_x(Alignment::Center)
+        .width(Fill),
         text("Happy Haven Daycare")
             .size(36)
             .font(Font {
@@ -755,7 +765,7 @@ fn view_login(state: &DaycareApp) -> Element<'_, Message> {
         .on_press(Message::LoginSubmit),
     );
 
-    let inner_card = container(column![logo, form].spacing(32).max_width(420))
+    let inner_card = container(column![logo, form].spacing(32).width(Length::Fixed(420.0)))
         .padding(44)
         .style(|_: &Theme| container::Style {
             background: Some(iced::Background::Color(CARD)),
